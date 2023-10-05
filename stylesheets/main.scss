@@ -1,0 +1,117 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+
+}
+
+@mixin align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+@mixin full-pic {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 4em;
+    color: white;
+
+}
+
+.navbar{
+    height: 5vh;
+    width: 100%;
+    background-color: teal;
+    @include align-center;
+
+
+}
+
+.parallax_wrapper {
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: 300px;
+
+
+    .intro_screen {
+    
+        background-image: linear-gradient(to bottom, transparent, #102a39), url("../inc/bild1.jpg");
+        @include align-center;
+        @include full-pic;
+ 
+    }
+
+    .outro_screen {
+        height: 100vh;
+        background-color: teal;
+        @include align-center;
+
+    }
+
+    .parallax_group {
+        position: relative;
+        height: 100vh;
+        transform-style: preserve-3d;
+
+    
+
+        .parallax_layer{
+            position: absolute;
+            height: 100vh;
+            inset: 0;
+            @include align-center;
+
+        }
+
+        .base_layer{
+            //scale calculation: 1 + ((Z transform value * -1) / perspective)
+            transform: translateZ(-290px) scale(2);
+
+        }
+
+        .mid_layer{
+            transform: translate(0);
+        }
+
+        .top_layer{
+            transform: translateZ(210px) scale(0.3);
+
+        }
+    }
+
+
+    #intro{
+        z-index: 2;
+    }
+
+    #group-1{
+        z-index: 1;
+
+    }
+    #group-1 > .base_layer{
+        background-color: #102a39;
+
+    }
+
+
+    #group-2{
+        z-index: 2;
+    }
+
+    #group-2 > .mid_layer{
+        background-color: yellowgreen;
+
+    }
+
+    #outro{
+
+    }
+}
